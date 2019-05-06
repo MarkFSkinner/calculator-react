@@ -1,31 +1,31 @@
 var numberList = {
-    "zero-button": 0,
-    "one-button": 1,
-    "two-button": 2,
-    "three-button": 3,
-    "four-button": 4,
-    "five-button": 5,
-    "six-button": 6,
-    "seven-button": 7,
-    "eight-button": 8,
-    "nine-button": 9,
-    "decimal-button": "."
+    'zero-button': 0,
+    'one-button': 1,
+    'two-button': 2,
+    'three-button': 3,
+    'four-button': 4,
+    'five-button': 5,
+    'six-button': 6,
+    'seven-button': 7,
+    'eight-button': 8,
+    'nine-button': 9,
+    'decimal-button': '.'
 };
 
 var operatorList = {
-    "divide-button": "/",
-    "multiply-button": "x",
-    "minus-button": "-",
-    "add-button": "+"
+    'divide-button': '/',
+    'multiply-button': 'x',
+    'minus-button': '-',
+    'add-button': '+'
 };
 
-var calculation = "";
+var calculation = '';
 var calculationArr = [];
-var currentNum = "";
+var currentNum = '';
 
 function findDecimalPlace(arr, num) {
-    if (arr[num].indexOf(".") > 0) {
-        return arr[num].length - arr[num].indexOf(".") - 1;
+    if (arr[num].indexOf('.') > 0) {
+        return arr[num].length - arr[num].indexOf('.') - 1;
     } else {
         return 0;
     }
@@ -34,7 +34,7 @@ function findDecimalPlace(arr, num) {
 function compute(arr) {
     if (arr.length === 3) {
         switch (arr[1]) {
-            case "+":
+            case '+':
                 var decimalPlace;
                 var firstDecPlace = findDecimalPlace(arr, 0);
                 var secondDecPlace = findDecimalPlace(arr, 2);
@@ -46,22 +46,22 @@ function compute(arr) {
                 currentNum = +Number.parseFloat(arr[0]).toPrecision() + +Number.parseFloat(arr[2]).toPrecision();
                 currentNum = currentNum.toFixed(decimalPlace);
                 break;
-            case "-":
+            case '-':
                 currentNum = Number.parseFloat(arr[0]).toPrecision() - Number.parseFloat(arr[2]).toPrecision();
                 break;
-            case "x":
+            case 'x':
                 currentNum = Number.parseFloat(arr[0]).toPrecision() * Number.parseFloat(arr[2]).toPrecision();
                 break;
-            case "/":
+            case '/':
                 currentNum = Number.parseFloat(arr[0]).toPrecision() / Number.parseFloat(arr[2]).toPrecision();
                 break;
         }
         currentNum = currentNum.toString();
         //Get rid of .0, .00, etc
         var reg = /^[1-9]+$/;
-        if (currentNum.indexOf(".") > 0) {
-            var afterDecimal = currentNum.slice(currentNum.indexOf(".") + 1, currentNum.length);
-            var afterDecArr = afterDecimal.split("");
+        if (currentNum.indexOf('.') > 0) {
+            var afterDecimal = currentNum.slice(currentNum.indexOf('.') + 1, currentNum.length);
+            var afterDecArr = afterDecimal.split('');
             var matchArr = [];
             for (i = 0; i < afterDecArr.length; i++) {
                 if (afterDecArr[i].match(reg)) {
@@ -69,11 +69,11 @@ function compute(arr) {
                 }
             }
             if (matchArr.length === 0) {
-                currentNum = currentNum.slice(0, currentNum.indexOf("."));
+                currentNum = currentNum.slice(0, currentNum.indexOf('.'));
             } else {
                 //Get rid of .10, .100, etc
                 for (i = afterDecArr.length - 1; i > 0; i--) {
-                    if (afterDecArr[i] === "0") {
+                    if (afterDecArr[i] === '0') {
                         currentNum = currentNum.slice(0, -1);
                     } else {
                         break;
@@ -83,7 +83,7 @@ function compute(arr) {
         }
         //Make sure number does not exceed character limit
         if (currentNum.length > 16) {
-            if (currentNum.indexOf(".") <= 1) {
+            if (currentNum.indexOf('.') <= 1) {
                 currentNum = Number.parseFloat(currentNum).toExponential(10);
                 currentNum = currentNum.toString();
             } else {
@@ -96,7 +96,7 @@ function compute(arr) {
         $('#total').html(currentNum);
         calculationArr.length = 0;
         calculationArr.push(currentNum);
-        currentNum = "";
+        currentNum = '';
     }
 }
 
@@ -105,19 +105,19 @@ $(function() {
     var equalsSelected = false;
     Object.keys(numberList).forEach(function(key) {
         $('#' + key).on('click', function() {
-            if (currentNum.indexOf(".") >= 0 && key === "decimal-button") {
+            if (currentNum.indexOf('.') >= 0 && key === 'decimal-button') {
                 var doubleDecimal = true;
             } else {
                 doubleDecimal = false;
             }
             if (doubleDecimal === false) {
-                if (currentNum === "0") {
-                    currentNum = "";
+                if (currentNum === '0') {
+                    currentNum = '';
                 }
-                if (calculation === "0") {
-                    calculation = "";
+                if (calculation === '0') {
+                    calculation = '';
                 }
-                if (calculation[calculation.length - 1] === "0" && calculation[calculation.length - 2] === " ") {
+                if (calculation[calculation.length - 1] === '0' && calculation[calculation.length - 2] === ' ') {
                     calculation = calculation.slice(0, -1);
                 }
                 if (operatorSelected === true && equalsSelected === true) {
@@ -125,12 +125,12 @@ $(function() {
                     operatorSelected = false;
                 }
                 if (equalsSelected === true) {
-                    currentNum = "";
-                    calculation = "";
+                    currentNum = '';
+                    calculation = '';
                     equalsSelected = false;
                 }
                 if (currentNum.length < 16) {
-                    if (key === "decimal-button" && currentNum === "") {
+                    if (key === 'decimal-button' && currentNum === '') {
                         currentNum += 0;
                     }
                     currentNum += numberList[key];
@@ -144,15 +144,15 @@ $(function() {
     Object.keys(operatorList).forEach(function(key) {
         $('#' + key).on('click', function() {
             //Get rid of 0., 1., 2., etc...
-            if (currentNum[currentNum.length - 1] === ".") {
+            if (currentNum[currentNum.length - 1] === '.') {
                 currentNum = currentNum.slice(0, -1);
-                $("#total").html(currentNum);
+                $('#total').html(currentNum);
             }
             if (equalsSelected === true) {
                 operatorSelected = false;
             }
-            if (operatorSelected === false && calculationArr[0] !== "Infinity") {
-                if (equalsSelected === false && calculation !== "0") {
+            if (operatorSelected === false && calculationArr[0] !== 'Infinity') {
+                if (equalsSelected === false && calculation !== '0') {
                     calculation += currentNum;
                 }
                 if (equalsSelected === true) {
@@ -161,28 +161,28 @@ $(function() {
                 if (calculationArr.length !== 1) {
                     calculationArr.push(currentNum);
                 }
-                currentNum = "";
+                currentNum = '';
                 compute(calculationArr);
-                if (calculationArr[0] === "Infinity" || calculationArr[0] === "-Infinity" || calculationArr[0] === "NaN") {
+                if (calculationArr[0] === 'Infinity' || calculationArr[0] === '-Infinity' || calculationArr[0] === 'NaN') {
                     $('#ac-button').click();
-                    $('#total').html("Cannot divide by zero");
-                    $('#accumulator').html("Cannot divide by zero");
+                    $('#total').html('Cannot divide by zero');
+                    $('#accumulator').html('Cannot divide by zero');
                 }
                 else {
-                    calculation += " ";
+                    calculation += ' ';
                     calculation += operatorList[key];
-                    calculation += " ";
+                    calculation += ' ';
                     calculationArr.push(operatorList[key]);
                     $('#accumulator').html(calculation);
                     operatorSelected = true;
                 }
             } else {
-                if (calculation !== "") {
+                if (calculation !== '') {
                     calculation = calculation.slice(0, -1);
                     calculation = calculation.slice(0, -1);
                     calculationArr.pop();
                     calculation += operatorList[key];
-                    calculation += " ";
+                    calculation += ' ';
                     calculationArr.push(operatorList[key]);
                     $('#accumulator').html(calculation);
                 }
@@ -193,22 +193,22 @@ $(function() {
     var constantNum;
     var operator;
     $('#equals-button').on('click', function() {
-        if (calculation !== "") {
+        if (calculation !== '') {
             //Get rid of 0., 1., 2., etc...
-            if (currentNum[currentNum.length - 1] === ".") {
+            if (currentNum[currentNum.length - 1] === '.') {
                 currentNum = currentNum.slice(0, -1);
             }
             if (operatorSelected === false) {
                 if (equalsSelected === false) {
                     calculationArr.push(currentNum);
-                    calculation = calculation + currentNum + " = ";
+                    calculation = calculation + currentNum + ' = ';
                     compute(calculationArr);
                     currentNum = calculationArr[0];
                     calculation = calculation + currentNum;
-                    if (calculationArr[0] === "Infinity" || calculationArr[0] === "-Infinity" || calculationArr[0] === "NaN") {
+                    if (calculationArr[0] === 'Infinity' || calculationArr[0] === '-Infinity' || calculationArr[0] === 'NaN') {
                         $('#ac-button').click();
-                        $('#total').html("Cannot divide by zero");
-                        $('#accumulator').html("Cannot divide by zero");
+                        $('#total').html('Cannot divide by zero');
+                        $('#accumulator').html('Cannot divide by zero');
                     } else {
                         $('#accumulator').html(calculation);
                         equalsSelected = true;
@@ -237,10 +237,10 @@ $(function() {
     });
 
     $('#ac-button').on('click', function() {
-        currentNum = "0";
-        $('#total').html("0");
-        calculation = "";
-        $('#accumulator').html("0");
+        currentNum = '0';
+        $('#total').html('0');
+        calculation = '';
+        $('#accumulator').html('0');
         calculationArr.length = 0;
         operatorSelected = true;
         equalsSelected = false;
@@ -250,29 +250,29 @@ $(function() {
         if (equalsSelected === true) {
             $('#ac-button').click();
         } else {
-            currentNum = "";
-            $('#total').html("0");
+            currentNum = '';
+            $('#total').html('0');
             operatorSelected = true;
         }
     });
 
     var allowedKeys = {
-        42: "multiply-button",
-        48: "zero-button",
-        49: "one-button",
-        50: "two-button",
-        51: "three-button",
-        52: "four-button",
-        53: "five-button",
-        54: "six-button",
-        55: "seven-button",
-        56:"eight-button",
-        57: "nine-button",
-        61: "equals-button",
-        107: "add-button",
-        189: "minus-button",
-        190: "decimal-button",
-        191: "divide-button"
+        42: 'multiply-button',
+        48: 'zero-button',
+        49: 'one-button',
+        50: 'two-button',
+        51: 'three-button',
+        52: 'four-button',
+        53: 'five-button',
+        54: 'six-button',
+        55: 'seven-button',
+        56:'eight-button',
+        57: 'nine-button',
+        61: 'equals-button',
+        107: 'add-button',
+        189: 'minus-button',
+        190: 'decimal-button',
+        191: 'divide-button'
     }
 
     var multiplied = false;
@@ -295,7 +295,6 @@ $(function() {
             $('#add-button').click();
         }
         if (e.keyCode === 61 || e.keyCode === 13) {
-            //e.preventDefault();
             $('#equals-button').click();
         }
         if (e.keyCode === 42) {
@@ -315,9 +314,9 @@ $(function() {
 
     $('#eight-button').on('click', function(e) {
         if (multiplied === true) {
-            currentNum = "";
+            currentNum = '';
             if (calculationArr.length === 0) {
-                $('#total').html("0");
+                $('#total').html('0');
             } else {
                 $('#total').html(calculationArr[0]);
             }

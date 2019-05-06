@@ -31,66 +31,6 @@
 #equals-button {
   height: 95%; }
 
-/*
-.btn {
-  //color: #000300;
-  //background-color: #00910A;
-  padding: 10px;
-  position: relative;
-  text-align: center;
-  //font-size: 24px;
-  //font-weight: bold;
-
-  box-shadow:
-    1px 1px 0 0 #014D06,
-    2px 2px 0 0 #014D06,
-    3px 3px 0 0 #014D06,
-    4px 4px 0 0 #014D06,
-    5px 5px 5px 0 #000000;
-
-    border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-
-  -webkit-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
-} */
-/*.btn:active {
-  box-shadow: 1px 1px 5px 0 #000000;
-  -webkit-box-shadow: 1px 1px 5px 0 #000000;
-  -moz-box-shadow: 1px 1px 5px 0 #000000;
-  top: 4px;
-  left: 4px;
-}*/
-/*.btn, .btn:focus {
-    display: block;
-    //font-size: 1.1em;
-    font-weight: bold;
-    //text-transform: uppercase;
-    //padding: 10px 15px;
-    //margin: 20px auto;
-    //color: #ccc;
-    background-color: #555;
-    background: -webkit-linear-gradient(#888, #555);
-    background: linear-gradient(#888, #555);
-    border: 0 none;
-    border-radius: 5px;
-    text-shadow: 0 -1px 0 #000;
-    box-shadow: 0 1px 0 #666, 0 5px 0 #444, 0 6px 6px rgba(0,0,0,0.6);
-    cursor: pointer;
-    -webkit-transition: all 150ms ease;
-    transition: all 150ms ease;
-}
-
-.btn:active {
-    //color: #fff;
-    //text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
-    //box-shadow: 0 1px 0 #666, 0 2px 0 #444, 0 2px 2px rgba(0,0,0,0.9);
-    -webkit-transform: translateY(3px);
-    transform: translateY(3px);
-    -webkit-animation: none;
-    animation: none;
-}*/
 .btn, .btn:focus {
   font-weight: bold;
   text-align: center;
