@@ -319,6 +319,29 @@ function handleBackButtonClick() {
     });
 }
 
+function handleNegativeButtonClick() {
+    $('#negative-button').on('click', function() {
+        if (state.currentNum !== '' && state.currentNum !== '0') {
+            if (state.currentNum.indexOf('-') === -1) {
+                state.currentNum = '-' + state.currentNum;
+                if (state.equalsSelected) {
+                    state.calculation = '-' + state.calculation;
+                }
+            } else {
+                state.currentNum = state.currentNum.substring(1);
+                if (state.equalsSelected) {
+                    state.calculation = state.calculation.substring(1);
+                }
+            }
+            if (state.calculationArr.length === 1) {
+                state.calculationArr[0] = state.currentNum;
+                state.calculation = state.currentNum;
+            }
+            $('#total').html(state.currentNum);
+        }
+    });
+}
+
 function addKeyCommand(list) {
     Object.keys(list).forEach(function(key) {
         document.addEventListener('keyup', function(e) {
@@ -381,6 +404,7 @@ $(function() {
     handleAcButtonClick();
     handleCeButtonClick();
     handleBackButtonClick();
+    handleNegativeButtonClick();
     addKeyCommand(state.numberList);
     addKeyCommand(state.operatorList);
     handleKeyPressEvent();
