@@ -305,6 +305,20 @@ function handleCeButtonClick() {
     });
 }
 
+function handleBackButtonClick() {
+    $('#back-button').on('click', function() {
+        if (!state.equalsSelected && !state.operatorSelected) {
+            state.currentNum = state.currentNum.substring(0, state.currentNum.length - 1);
+            if (state.currentNum === '') {
+                state.currentNum = '0';
+                $('#total').html('0');
+            } else {
+                $('#total').html(state.currentNum);
+            }
+        }
+    });
+}
+
 function addKeyCommand(list) {
     Object.keys(list).forEach(function(key) {
         document.addEventListener('keyup', function(e) {
@@ -335,7 +349,7 @@ function handleKeyUpEvent() {
     document.addEventListener('keyup', function(e) {
         //'back' key
         if (e.keyCode === 8) {
-            $('#ce-button').click();
+            $('#back-button').click();
         }
         //'delete' key
         if (e.keyCode === 46) {
@@ -366,6 +380,7 @@ $(function() {
     handleEqualsButtonClick();
     handleAcButtonClick();
     handleCeButtonClick();
+    handleBackButtonClick();
     addKeyCommand(state.numberList);
     addKeyCommand(state.operatorList);
     handleKeyPressEvent();
