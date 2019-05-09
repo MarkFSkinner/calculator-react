@@ -79,14 +79,18 @@ function compute(arr) {
     state.currentNum = state.currentNum.toString();
     //Make sure number does not exceed character limit
     if (state.currentNum.length > 16) {
-        //If number begins with '0.'...
+        //Check if number begins with '0.'...
         if (state.currentNum.indexOf('.') <= 1) {
             state.currentNum = Number.parseFloat(state.currentNum).toExponential(10);
         } else {
             let tempArr = [];
             tempArr.push(state.currentNum);
             let maxDecimalPlace = 16 - (state.currentNum.length - findDecimalPlace(tempArr, 0));
-            state.currentNum = Number.parseFloat(state.currentNum).toFixed(maxDecimalPlace);
+            if (maxDecimalPlace >= 0) {
+                state.currentNum = Number.parseFloat(state.currentNum).toFixed(maxDecimalPlace);
+            } else {
+                state.currentNum = Number.parseFloat(state.currentNum).toExponential(10);
+            }
         }
     }
     //Get rid of '.0', '.00', etc
