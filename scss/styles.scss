@@ -1,3 +1,7 @@
+body {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
 .container {
     background-color: #fff;
     margin-top: 2.5rem;
@@ -7,24 +11,34 @@
 #calculator-container {
     background-color: #ecebeb;
     border: 0.125rem solid #c5c3c3;
-    border-radius: 15px;
-    max-width: 18.75rem;
+    max-width: 21rem;
     height:90%;
-    min-height: 24rem;
-    margin-top: 3.125rem;
+    min-height: 27rem;
     margin-bottom: 3.125rem;
     margin-left: auto;
     margin-right: auto;
     padding: 0.625rem;
-    box-shadow: 7px 7px 5px grey;
+}
+
+#title {
+    font-size: 1rem;
 }
 
 #view-screen {
     background-color: #e9ecdf;
-    border: 0.125rem solid black;
-    border-radius: 5px;
+    border: 0.125rem solid hsl(0, 0%, 65%);
     margin-left: auto;
     margin-right: auto;
+}
+
+#total {
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+#accumulator {
+  margin-top: 1rem;
+  padding-right: 0.2rem;
 }
 
 .btn {
@@ -32,8 +46,11 @@
     width: 100%;
 }
 
-#equals-button {
-    //height: 95%;
+.btn-primary {
+    border-radius: 0rem;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
 }
 
 .btn, .btn:focus {
@@ -44,8 +61,6 @@
     color: #fff;
     background-color: #555;
     border: none;
-    border-radius: 5px;
-    box-shadow: 0 9px #999;
 }
 
 .btn:hover {
@@ -54,25 +69,16 @@
 
 .btn:active {
     background-color: #555;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
 }
 
 .btn-function, .btn-function:focus {
     background-color: #c30000;
-    box-shadow: 0 9px #ab8383;
 }
 
 .btn-function:active {
     background-color: #c30000;
-    box-shadow: 0 5px #896a6a;
-    transform: translateY(4px);
 }
 
 .btn-function:hover {
     background-color: #630101;
-}
-
-h5 {
-    font-size: 1rem;
 }
