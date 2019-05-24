@@ -101,8 +101,9 @@ class App extends React.Component {
     });
     //Make sure number does not exceed character limit
     if (this.state.currentNum.length > 16) {
-      //Check if number begins with '0.'...
-      if (this.state.currentNum.indexOf('.') <= 1) {
+      //Check if number begins with '0.000'...
+      let numStart = this.state.currentNum.slice(0, 5);
+      if (numStart === '0.000') {
         await this.setState({
           currentNum: Number.parseFloat(this.state.currentNum).toExponential(10)
         });
