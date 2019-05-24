@@ -40,6 +40,10 @@ body {
     padding-right: 0.2rem;
 }
 
+#button-container {
+    touch-action: manipulation;
+}
+
 .btn {
     margin-top: 0.625rem;
     width: 100%;
