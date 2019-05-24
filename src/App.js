@@ -50,7 +50,8 @@ class App extends React.Component {
       190: 'decimal-button',
       191: 'divide-button'
     },
-    multiplied: false
+    multiplied: false,
+    maxDigits: 16
   }
 
   componentDidMount = () => {
@@ -100,7 +101,7 @@ class App extends React.Component {
       currentNum: this.state.currentNum.toString()
     });
     //Make sure number does not exceed character limit
-    if (this.state.currentNum.length > 16) {
+    if (this.state.currentNum.length > this.state.maxDigits) {
       //Check if number begins with '0.000'...
       let numStart = this.state.currentNum.slice(0, 5);
       if (numStart === '0.000') {
@@ -110,7 +111,7 @@ class App extends React.Component {
       } else {
         let tempArr = [];
         tempArr.push(this.state.currentNum);
-        let maxDecimalPlace = 16 - (this.state.currentNum.length - this.findDecimalPlace(tempArr, 0));
+        let maxDecimalPlace = this.state.maxDigits - (this.state.currentNum.length - this.findDecimalPlace(tempArr, 0));
         if (maxDecimalPlace >= 0) {
           await this.setState({
             currentNum: Number.parseFloat(this.state.currentNum).toFixed(maxDecimalPlace)
@@ -173,7 +174,7 @@ class App extends React.Component {
       }
     }
     //Check if max # of digits has been reached
-    if (this.state.currentNum.length < 16) {
+    if (this.state.currentNum.length < this.state.maxDigits) {
       let doubleDecimal = false;
       if (this.state.currentNum.indexOf('.') >= 0 && currentButton === 'decimal-button') {
         doubleDecimal = true;
